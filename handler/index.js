@@ -26,9 +26,7 @@ const sendMedia = async (chatId, mediaType, mediaName) => {
   try {
     await connectDB();
     const media = await Media.findOne({ type: mediaType, name: mediaName });
-    await bot.sendMessage(chatId, `Please hang tight!! Wait for 5-10 seconds`);
     if (media) {
-      await bot.deleteMessage(chatId);
       await bot.sendMessage(chatId, `Here is your ${mediaType}: ${mediaName}\n${media.url}`);
     } else {
       await bot.sendMessage(chatId, `${mediaType} not found.`);
